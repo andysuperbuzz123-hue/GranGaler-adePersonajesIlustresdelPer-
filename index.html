@@ -32,7 +32,7 @@
         <!-- Buscador y Filtros -->
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
             <div class="w-full md:w-1/2 relative">
-                <input type="text" id="searchInput" placeholder="Busca por nombre, rol o palabra clave (ej. Grau, Basadre, Poesía...)" 
+                <input type="text" id="searchInput" placeholder="Busca por nombre, rol o palabra clave (ej. Grau, Moyano, Heroínas...)" 
                     class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-50 text-slate-800 font-medium transition shadow-inner">
                 <span class="absolute left-4 top-3.5 text-xl">🔍</span>
             </div>
@@ -41,6 +41,7 @@
                 <button onclick="filterCategory('todos')" class="filter-btn px-4 py-2.5 rounded-xl bg-red-700 text-white font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-md">Todos</button>
                 <button onclick="filterCategory('arequipa')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-sm">Arequipa / Hunter</button>
                 <button onclick="filterCategory('nacional')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-sm">Héroes Nacionales</button>
+                <button onclick="filterCategory('heroinas')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-sm">👑 Heroínas y Precursoras</button>
                 <button onclick="filterCategory('cultura')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-sm">Letras y Ciencia</button>
             </div>
         </div>
@@ -56,30 +57,16 @@
             <p class="text-xl font-bold text-slate-700 mt-3">No encontramos resultados para tu búsqueda</p>
         </div>
 
-        <!-- Sección para Sugerir un Personaje (Envía correo directo) -->
-        <section class="mt-16 bg-white rounded-3xl p-8 shadow-sm border border-slate-200 max-w-3xl mx-auto">
-            <div class="text-center mb-6">
-                <span class="text-2xl">✉️</span>
-                <h3 class="text-2xl font-bold text-slate-900 mt-2">¿Falta algún personaje histórico?</h3>
-                <p class="text-sm text-slate-600 mt-1">Los estudiantes pueden sugerir un nuevo héroe o figura influyente para agregarlo a la app escribiendo directamente.</p>
-            </div>
-            <form action="mailto:andysuperbuzz123@gmail.com" method="POST" enctype="text/plain" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tu Nombre o Grado:</label>
-                    <input type="text" name="Estudiante" required placeholder="Ej. Andy (3er año)" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-50 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Nombre del Personaje que deseas sugerir:</label>
-                    <input type="text" name="Personaje_Sugerido" required placeholder="Ej. Mariscal Ramón Castilla, etc." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-50 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">¿Por qué deberíamos agregarlo? (Breve razón):</label>
-                    <textarea name="Motivo" rows="3" required placeholder="Escribe un pequeño motivo..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-50 text-sm"></textarea>
-                </div>
-                <button type="submit" class="w-full py-3 bg-red-700 hover:bg-red-800 text-white font-bold rounded-xl shadow-md transition duration-200 cursor-pointer">
-                    Enviar Sugerencia por Correo 🚀
-                </button>
-            </form>
+        <!-- Sección de Sugerencias Segura -->
+        <section class="mt-16 bg-white rounded-3xl p-8 shadow-sm border border-slate-200 max-w-3xl mx-auto text-center">
+            <span class="text-3xl">💡</span>
+            <h3 class="text-2xl font-bold text-slate-900 mt-2">¿Falta algún personaje histórico?</h3>
+            <p class="text-sm text-slate-600 mt-1 mb-6">Ayúdanos a completar la galería enviando tu propuesta mediante nuestro buzón oficial.</p>
+            
+            <a href="https://forms.gle/TU_ENLACE_DE_GOOGLE_FORMS" target="_blank" class="inline-block px-8 py-4 bg-red-700 hover:bg-red-800 text-white font-extrabold rounded-2xl shadow-md transition duration-200 text-sm tracking-wide">
+                Sugerir un Personaje 🚀
+            </a>
+            <p class="text-[11px] text-slate-400 mt-3">El enlace se abrirá de forma segura en una pestaña nueva.</p>
         </section>
     </main>
 
@@ -121,9 +108,10 @@
         <p class="font-medium">Plataforma escolar interactiva diseñada para estudiantes y docentes del Perú 📚✨</p>
     </footer>
 
-    <!-- Script JavaScript con Información Ampliada -->
+    <!-- Script JavaScript con Base de Datos Actualizada -->
     <script>
         const characters = [
+            // --- AREQUIPA / HUNTER ---
             {
                 id: 1,
                 name: "Juan Pablo Vizcardo y Guzmán",
@@ -185,152 +173,180 @@
                 category: "arequipa",
                 role: "Historiador de la República",
                 dates: "1903 - 1980",
-                summary: "Nacido en Tacna y profundamente vinculado a la vida cultural de Arequipa (donde cursó estudios superiores y formó parte vital de su vida intelectual), Jorge Basadre es considerado el historiador peruano más importante del siglo XX. Dedicó absolutamente toda su existencia a estudiar, comprender y narrar la evolución social, política, económica y cultural del Perú independiente, superando la visión elitista de la historia para incluir al pueblo llano.",
+                summary: "Nacido en Tacna y profundamente vinculado a la vida cultural de Arequipa (donde cursó estudios superiores y formó parte vital de la vida intelectual), Jorge Basadre es considerado el historiador peruano más importante del siglo XX. Dedicó absolutamente toda su existencia a estudiar, comprender y narrar la evolución social, política, económica y cultural del Perú independiente, superando la visión elitista de la historia para incluir al pueblo llano.",
                 aportes: "Su obra cumbre, 'Historia de la República del Perú' (que amplió y perfeccionó a lo largo de varias décadas en múltiples tomos), es la herramienta de consulta indispensable para entender nuestro devenir republicano. Además, como ministro de Educación impulsó de manera decisiva la modernización de las bibliotecas escolares y la protección del patrimonio cultural nacional.",
                 curiosidad: "Es el autor de la célebre frase: 'El Perú es un organismo dolido y a la vez prometedor', reflejando su visión optimista y realista sobre el futuro del país a pesar de sus múltiples crisis políticas.",
                 badgeColor: "bg-orange-100 text-orange-800"
             },
+
+            // --- HEROÍNAS Y PRECURSORAS ---
             {
                 id: 7,
+                name: "María Parado de Bellido",
+                category: "heroinas",
+                role: "Heroína de la Independencia",
+                dates: "1761 - 1822",
+                summary: "Valerosa mujer ayacuchana que actuó como informante estratégica y espía a favor de las fuerzas patriotas durante la lucha emancipadora dirigida por Simón Bolívar y Antonio José de Sucre en los Andes peruanos.",
+                aportes: "Prefirió ser fusilada por el ejército realista antes que revelar los nombres de los mensajeros y patriotas que colaboraban con la libertad nacional. Dictaba sus cartas con movimientos enemigos a un escribano de confianza.",
+                curiosidad: "Dado que era analfabeta en esa época, utilizaba su ingenio absoluto para memorizar y transmitir datos vitales sin levantar sospechas.",
+                badgeColor: "bg-pink-100 text-pink-800"
+            },
+            {
+                id: 8,
+                name: "Micaela Bastidas",
+                category: "heroinas",
+                role: "Heroína y Estratega",
+                dates: "1744 - 1781",
+                summary: "Lideresa indígena de férreo carácter que organizó la compleja logística, el aprovisionamiento militar y las comunicaciones de la gran rebelión anticolonial junto a su esposo Túpac Amaru II.",
+                aportes: "Demostró una visión política y militar sobresaliente, exigiendo ataques rápidos y oportunos que muchas veces evitaron derrotas tempranas de las tropas rebeldes en el sur andino.",
+                curiosidad: "En documentos oficiales de la administración colonial se le otorgaba el rango de 'Coya' (reina) por el inmenso respeto y autoridad que imponía.",
+                badgeColor: "bg-pink-100 text-pink-800"
+            },
+            {
+                id: 9,
+                name: "María Elena Moyano",
+                category: "heroinas",
+                role: "Lideresa Social y Mártir",
+                dates: "1958 - 1992",
+                summary: "Valiente activista social y defensora de los derechos humanos nacida en el Callao y arraigada en Villa El Salvador (Lima). Luchó incansablemente por la justicia social, los comedores populares y la paz.",
+                aportes: "Fundó la Federación Popular de Mujeres de Villa El Salvador (FEPOMUVES), organizando a las madres contra el hambre y enfrentándose con valentía frontal al terrorismo y la violencia política.",
+                curiosidad: "Era conocida popularmente como 'Mad Coraje' por su firmeza inquebrantable al marchar públicamente contra la intolerancia armada.",
+                badgeColor: "bg-pink-100 text-pink-800"
+            },
+            {
+                id: 10,
+                name: "Juana Alarco de Dammert",
+                category: "heroinas",
+                role: "Precursora de la Educación Inicial",
+                dates: "1842 - 1932",
+                summary: "Distinguida educadora, filántropa y benefactora peruana, conocida como la 'Abuela de los Niños' debido a su abnegada labor social en favor de la infancia y la educación pública.",
+                aportes: "Impulsó la creación de los primeros jardines de infancia (kindergartens) en el Perú y fundó instituciones benéficas y protectoras de la infancia desamparada y la maternidad.",
+                curiosidad: "Donó gran parte de su patrimonio personal para financiar asilos y escuelas destinadas a niños de familias de bajos recursos económicos.",
+                badgeColor: "bg-pink-100 text-pink-800"
+            },
+
+            // --- HÉROES NACIONALES ---
+            {
+                id: 11,
                 name: "Miguel Grau",
                 category: "nacional",
                 role: "Caballero de los Mares",
                 dates: "1834 - 1879",
-                summary: "Miguel Grau Seminario nació en Piura y se convirtió desde muy joven en un marino experto, recorriendo los océanos mercantes antes de ingresar a la Marina de Guerra del Perú. Al estallar la Guerra del Pacífico en 1879, asumió el mando del monitor blindado Huáscar. A pesar de la inferioridad numérica y material de la escuadra peruana frente a la chilena, Grau dirigió una campaña naval brillante, audaz y estratégica que mantuvo en total zozobra al enemigo durante meses.",
-                aportes: "Además de su genialidad táctica en alta mar, Grau se ganó el respeto y la admiración mundial (incluso de sus adversarios) debido a su caballerosidad legendaria: tras el combate de Iquique, rescató y ordenó curar a los náufragos enemigos sobrevivientes y devolvió con una respetuosa carta las pertenencias del comandante rival Arturo Prat a su viuda.",
-                curiosidad: "Era conocido afectuosamente por sus marineros como el 'Caballero de los Mares' y por sus colegas en el parlamento (donde fue diputado por Paita) por su honradez intachable y su sencillez absoluta en el trato diario.",
+                summary: "Máximo héroe naval del Perú y comandante del legendario monitor Huáscar durante la Guerra del Pacífico. Demostró una maestría táctica impecable en el mar, manteniendo en constante jaque a la escuadra adversaria.",
+                aportes: "Su hidalguía y respeto absoluto por las leyes de la guerra y la vida humana le valieron el reconocimiento internacional, ordenando rescatar y auxiliar a los náufragos enemigos tras el combate de Iquique.",
+                curiosidad: "Era un hombre de trato sumamente sencillo, profundamente respetado por sus marineros y caracterizado por su firme rechazo a la vanidad militar.",
                 badgeColor: "bg-blue-100 text-blue-800"
             },
             {
-                id: 8,
+                id: 12,
                 name: "Francisco Bolognesi",
                 category: "nacional",
                 role: "Héroe de Arica",
                 dates: "1816 - 1880",
-                summary: "Francisco Bolognesi Cervantes fue un militar peruano de distinguida trayectoria que sirvió con lealtad inquebrantable a la patria. Antes de dedicarse de lleno a la carrera de las armas en su madurez, trabajó exitosamente como comerciante. Al desatarse la Guerra del Pacífico, a pesar de contar con más de sesenta años de edad, no dudó en vestir el uniforme militar para ponerse al frente de la defensa nacional, siendo asignado para comandar la plaza militar de Arica.",
-                aportes: "Lideró la defensa del Morro de Arica en condiciones sumamente adversas, sin víveres suficientes, con tropas diezmadas y completamente aislado por tierra y mar. Ante el ultimátum de rendición enviado por el ejército enemigo, pronunció su histórica respuesta que resuena por los siglos: 'Tengo deberes sagrados que cumplir y los cumpliré hasta quemar el último cartucho', inmortalizándose como símbolo supremo del honor militar.",
-                curiosidad: "Antes de la batalla final, escribió una conmovedora carta de despedida a su esposa María Josefa en la que se aprecia su profunda ternura familiar combinada con el deber patriótico absoluto.",
+                summary: "Coronel del Ejército peruano que asumió con estoicismo el mando de la guarnición en el Morro de Arica, organizando la defensa en condiciones de extrema inferioridad numérica y material.",
+                aportes: "Inmortalizó el honor patrio con su mítica respuesta ante el emisario adversario: 'Tengo deberes sagrados que cumplir y los cumpliré hasta quemar el último cartucho'.",
+                curiosidad: "Inició su trayectoria militar formal a una edad madura, habiendo destacado previamente con éxito en el ámbito del comercio nacional.",
                 badgeColor: "bg-blue-100 text-blue-800"
             },
             {
-                id: 9,
+                id: 13,
                 name: "Alfonso Ugarte",
                 category: "nacional",
                 role: "Héroe de la Batalla de Arica",
                 dates: "1847 - 1880",
-                summary: "Alfonso Ugarte y Vernal fue un acaudalado empresario, minero y agricultor nacido en Iquique (territorio entonces peruano), con una sólida posición económica y estudios en Valparaíso y Europa. Al estallar la guerra contra Chile, lejos de mantenerse al margen disfrutando de su fortuna, decidió organizar, armar y financiar íntegramente un batallón con sus propios recursos económicos para marchar al frente de batalla en defensa del suelo peruano.",
-                aportes: "Participó en la defensa de Tarapacá y posteriormente se replegó hacia Arica junto al coronel Francisco Bolognesi. Su máximo sacrificio ocurrió durante el asalto final al Morro de Arica el 7 de junio de 1880, donde, viendo la inminente caída de la posición ante el avance enemigo, galopó hacia la cima y se arrojó al abismo con su caballo para evitar que el estandarte nacional cayera en manos contrarias.",
-                curiosidad: "Donó grandes sumas de dinero a la Cruz Roja peruana y equipó por completo a sus soldados con uniformes comprados con su propio peculio.",
+                summary: "Empresario y militar tarapaqueño que decidió sacrificar su patrimonio y su propia vida en defensa de la soberanía nacional durante la campaña del sur.",
+                aportes: "Se consagró en la eternidad al lanzarse a caballo por los precipicios del Morro de Arica para evitar que el estandarte patrio fuera capturado como trofeo enemigo.",
+                curiosidad: "Financió y equipó enteramente de su bolsillo a uno de los batallones que marcharon a defender la plaza militar.",
                 badgeColor: "bg-blue-100 text-blue-800"
             },
             {
-                id: 10,
+                id: 14,
                 name: "José Abelardo Quiñones",
                 category: "nacional",
                 role: "Héroe de la Aviación",
                 dates: "1914 - 1941",
-                summary: "José Abelardo Quiñones Gonzales nació en Pimentel (Lambayeque) y desde su juventud demostró una vocación apasionada por la aeronáutica. Ingresó a la Escuela de Aviación Jorge Chávez, donde se graduó con honores como alférez de aeronáutica, destacando por su destreza acrobática y su dominio en el pilotaje de aviones de caza. Al desatarse el conflicto armado con el vecino país de Ecuador en julio de 1941, fue asignado al primer escuadrón de caza para cumplir misiones de apoyo aéreo.",
-                aportes: "Durante una misión de bombardeo sobre puestos defensivos enemigos en la quebrada de Secallate, su aeronave fue alcanzada por fuego antiaéreo enemigo, incendiándose gravemente. En lugar de utilizar su paracaídas para salvar su propia vida, Quiñones controló su avión averiado y lo estrelló deliberadamente contra la batería antiaérea contraria, destruyéndola y consagrándose como patrono de la Fuerza Aérea del Perú.",
-                curiosidad: "Su inolvidable hazaña y su rostro son homenajeados diariamente por millones de peruanos al figurar en el diseño oficial de los billetes de diez soles.",
+                summary: "Valeroso capitán de la Fuerza Aérea del Perú que ofrendó su existencia durante el conflicto fronterizo con Ecuador en el año 1941.",
+                aportes: "Al ser alcanzado su avión por fuego antiaéreo en plena misión, dirigió su nave envuelta en llamas directamente contra las baterías enemigas, cumpliendo su deber supremo.",
+                curiosidad: "Su inolvidable rostro ilustra tradicionalmente el diseño oficial de los billetes de diez soles en el cono monetario peruano.",
                 badgeColor: "bg-blue-100 text-blue-800"
             },
             {
-                id: 11,
-                name: "María Parado de Bellido",
-                category: "nacional",
-                role: "Heroína de la Independencia",
-                dates: "1761 - 1822",
-                summary: "María Parado de Bellido nació en Huamanga (Ayacucho) en el seno de una familia humilde de origen indígena. Casada con Mariano Bellido, tuvo siete hijos. Durante las campañas de emancipación dirigidas por Simón Bolívar y Antonio José de Sucre en los Andes peruanos, su esposo e hijos se sumaron clandestinamente a las guerrillas patriotas. María actuó como una valerosa informante y espía, recopilando datos sobre los movimientos y planes de las tropas realistas.",
-                aportes: "Utilizando a un colaborador de confianza que redactaba sus cartas (dado que no sabía escribir), enviaba mensajes detallados advirtiendo a las fuerzas patriotas sobre las emboscadas que preparaba el virrey. Capturada por el general español José Carratalá, fue sometida a interrogatorios brutales para que delatara a su red de contactos, pero se mantuvo firme en silencio absoluto, siendo condenada al fusilamiento.",
-                curiosidad: "Antes de recibir los disparos del pelotón de ejecución, se dice que el oficial español le ofreció perdonarle la vida si revelaba los nombres de los patriotas, a lo que ella respondió con valentía legendaria que no tenía nombres que dar.",
-                badgeColor: "bg-emerald-100 text-emerald-800"
-            },
-            {
-                id: 12,
+                id: 15,
                 name: "Túpac Amaru II",
                 category: "nacional",
                 role: "Precursor Indígena",
                 dates: "1738 - 1781",
-                summary: "José Gabriel Condorcanqui Noguera, conocido históricamente como Túpac Amaru II, nació en Tinta (Cusco) y era cacique de Surimana, Tungasuca y Pampamarca. Descendiente directo de los últimos incas de Vilcabamba, recibió una educación esmerada en el colegio de caciques San Francisco de Borja en el Cusco. Su posición acomodada como arriero le permitió recorrer vastas regiones del virreinato, presenciando los abusos inhumanos de la mita minera, los repartos mercantiles obligatorios y los pesados tributos impuestos a los indígenas.",
-                aportes: "Encabezó el 4 de noviembre de 1780 la rebelión anticolonial más grande, trascendental y masiva de toda la historia de América en el siglo XVIII. Exigió el fin de los abusos coloniales, la abolición de la esclavitud de los negros y la supresión de los corregimientos. Su gesta despertó la conciencia libertaria en todo el continente antes de ser cruelmente ejecutado en la Plaza de Armas del Cusco.",
-                curiosidad: "Adoptó el nombre de Túpac Amaru II en honor a su ilustre antepasado Túpac Amaru I, último inca ajusticiado por el virrey Francisco de Toledo en 1572.",
-                badgeColor: "bg-emerald-100 text-emerald-800"
+                summary: "Cacique de Surimana, Tungasuca y Pampamarca que lideró el levantamiento anticolonial más colosal del siglo XVIII en todo el continente americano.",
+                aportes: "Encabezó la lucha masiva contra los abusos de los corregidores, la mita esclavizadora, los repartos mercantiles y los gravámenes excesivos de la corona.",
+                curiosidad: "Era un hombre instruido, bilingüe (español y quechua), dedicado al comercio de arrieraje con recuas de mulas.",
+                badgeColor: "bg-blue-100 text-blue-800"
             },
             {
-                id: 13,
-                name: "Micaela Bastidas",
-                category: "nacional",
-                role: "Heroína y Estratega",
-                dates: "1744 - 1781",
-                summary: "Micaela Bastidas Puyucahua nació en Tamburco (Abancay) y fue la compañera de vida, esposa y estratega fundamental de Túpac Amaru II. Mujer de carácter firme, inteligencia política superior y gran temple organizativo, desempeñó un rol directivo vital dentro de la gran rebelión de 1780, demostrando una capacidad de liderazgo militar y logístico que asombró tanto a sus aliados como a sus enemigos realistas.",
-                aportes: "Fue la encargada principal de organizar el aprovisionamiento de armas, alimentos, municiones y la red de comunicaciones e inteligencia que conectaba los diversos frentes de lucha. En repetidas ocasiones aconsejó a Túpac Amaru actuar con rapidez táctica sobre el Cusco, demostrando una visión militar superior. Fue capturada junto a su esposo y ajusticiada con extrema crueldad en el Cusco defendiendo la libertad de su pueblo.",
-                curiosidad: "En los documentos oficiales y cartas de la época incautados por los españoles, se le otorgaba el título de 'Coya' (reina), reconociendo el inmenso respeto y autoridad que ejercía sobre las tropas rebeldes.",
-                badgeColor: "bg-emerald-100 text-emerald-800"
-            },
-            {
-                id: 14,
+                id: 16,
                 name: "José Olaya",
                 category: "nacional",
                 role: "Mártir Patriota",
                 dates: "1782 - 1823",
-                summary: "José Olaya Balandra nació en Chorrillos (Lima) en el seno de una familia de pescadores artesanales. Hombre sencillo, bondadoso y profundamente patriota, vivió de cerca las luchas por la independencia en la capital cuando las fuerzas patriotas y realistas se disputaban el control estratégico del territorio. Aprovechando su oficio de pescador, conocía cada rincón de la costa y las caletas pesqueras.",
-                aportes: "Sirvió como valeroso nexo y correo secreto de comunicación entre el gobierno patriota refugiado en los castillos del Callao y los independentistas en Lima. Nadaba diariamente a través del mar llevando documentos y cartas secretas atadas a su cintura. Capturado por los realistas, soportó horribles torturas con varas de espino sin pronunciar una sola palabra que delatara a sus compatriotas, prefiriendo la muerte antes que la traición.",
-                curiosidad: "Su última voluntad antes de ser fusilado en el pasaje que hoy lleva su nombre en el centro de Lima fue pedir unos dulces picarones, mostrando una serenidad asombrosa ante su inminente ejecución.",
-                badgeColor: "bg-emerald-100 text-emerald-800"
+                summary: "Modesto pescador chorrillano que arriesgó su vida permanentemente al servir como enlace secreto de comunicación nadando entre los dos bandos independentistas.",
+                aportes: "Transportaba mensajes confidenciales amarrados a su cintura a través de las aguas marinas, soportando crueles tormentos y torturas sin delatar a nadie.",
+                curiosidad: "Cuenta la tradición popular que antes de marchar al fusilamiento, pidió como última voluntad saborear unos dulces picarones.",
+                badgeColor: "bg-blue-100 text-blue-800"
             },
+
+            // --- LETRAS Y CIENCIA ---
             {
-                id: 15,
+                id: 17,
                 name: "Abraham Valdelomar",
                 category: "cultura",
                 role: "Escritor y Poeta Modernista",
                 dates: "1888 - 1919",
-                summary: "Pedro Abraham Valdelomar Pinto nació en Ica pero pasó su infancia en el puerto de Pisco, vivencias costeras que marcarían de forma imborrable su tierna y nostálgica producción literaria. Fue cuentista, poeta, periodista, dramaturgo y ensayista. Considerado el creador del postmodernismo peruano y líder del movimiento intelectual aristocrático de su época, revolucionó la literatura nacional al otorgar dignidad literaria a la vida de provincia y al hogar familiar.",
-                aportes: "Su cuento corto 'El caballero Carmelo' es considerado la obra maestra fundacional del cuento criollo y provinciano en el Perú. Fundó la célebre revista 'Colónida', desde donde sacudió el panorama cultural peruano criticando el academicismo rancio y promoviendo la libertad estética y la renovación absoluta de las letras patrias.",
-                curiosidad: "Era conocido por su exquisito dandismo y su personalidad excéntrica en los mentideros limeños: solía pasearse con bastón elegante, capa y flores en la solapa, declarando con humor que 'el Perú es Lima, Lima es el Jirón de la Unión, y el Jirón de la Unión soy yo'.",
-                badgeColor: "bg-purple-100 text-purple-800"
-            },
-            {
-                id: 16,
-                name: "José María Arguedas",
-                category: "cultura",
-                role: "Escritor y Antropólogo",
-                dates: "1911 - 1969",
-                summary: "José María Arguedas Altamirano nació en Andahuaylas y fue uno de los escritores, novelistas y antropólogos más importantes y profundos de la historia del Perú. Su infancia estuvo marcada por una tragedia familiar y por el refugio que encontró al convivir con comunidades campesinas quechuas, idioma que aprendió a hablar antes que el castellano. Dedicó su vida a estudiar la cultura andina y a luchar contra la discriminación sistemática del indígena.",
-                aportes: "Escribió novelas monumentales e indispensables como 'Los ríos profundos', 'Yawar Fiesta' y 'El zorro de arriba y el zorro de abajo'. Su mayor aporte fue lograr plasmar con autenticidad literaria el universo mágico, musical y social del mundo andino, logrando tender un puente definitivo y bicultural entre el quechua y la literatura occidental moderna.",
-                curiosidad: "Además de su genio literario, fue un destacado profesor universitario, etnólogo y director de la Casa de la Cultura, recopilando canciones, mitos y danzas tradicionales de todo el territorio nacional.",
-                badgeColor: "bg-purple-100 text-purple-800"
-            },
-            {
-                id: 17,
-                name: "Daniel Alcides Carrión",
-                category: "cultura",
-                role: "Mártir de la Medicina",
-                dates: "1857 - 1885",
-                summary: "Daniel Alcides Carrión García nació en Cerro de Pasco y quedó huérfano a temprana edad, trasladándose a Lima para culminar sus estudios escolares y posteriormente ingresar a la Facultad de Medicina de San Fernando. Durante sus años de formación universitaria, observó con profunda preocupación los estragos mortales causados por una enfermedad endémica conocida como la 'fiebre de la Oroya' o 'verruga peruana', que diezmaba a los trabajadores en los Andes centrales sin que la ciencia supiera cómo tratarla.",
-                aportes: "Para resolver el misterio médico de si la fiebre grave y la verruga eran manifestaciones de una misma enfermedad, tomó la valiente y trágica decisión de inocularse voluntariamente sangre infectada con secreciones verrugosas el 27 de agosto de 1885. Registró científicamente día a día en un diario los síntomas de su propio cuerpo hasta caer mortalmente enfermo, legando un hito mundial de abnegación científica.",
-                curiosidad: "En homenaje a su supremo sacrificio y al valor de sus apuntes clínicos, la fecha de su fallecimiento (5 de octubre) se celebra en el Perú como el 'Día de la Medicina Peruana'.",
+                summary: "Destacado cuentista, poeta y ensayista iqueño, considerado el creador del postmodernismo literario peruano gracias a obras tan entrañables como 'El caballero Carmelo'.",
+                aportes: "Desplazó el eje de la narrativa nacional hacia la provincia costera, la calidez de la vida familiar y la nostalgia pueblerina con un estilo estético refinado.",
+                curiosidad: "Era célebre en los círculos bohemios limeños por su gran elegancia personal, sombreros llamativos y actitud vanguardista.",
                 badgeColor: "bg-purple-100 text-purple-800"
             },
             {
                 id: 18,
-                name: "Hipólito Unanue",
+                name: "José María Arguedas",
                 category: "cultura",
-                role: "Médico y Sabio",
-                dates: "1755 - 1833",
-                summary: "José Hipólito Unanue y Pavón nació en Arica y fue uno de los sabios criollos más ilustres del periodo de transición entre el virreinato y la república. Poseedor de una mente enciclopédica, destacó como médico, botánico, catedrático universitario y político influyente. Fundó el Anfiteatro Anatómico y la gloriosa Escuela de Medicina de San Fernando, transformando radicalmente la enseñanza científica en el país.",
-                aportes: "Fue el fundador de la Sociedad Amantes del País y coeditor de la célebre publicación 'Mercurio Peruano', desde donde se impulsó la identidad nacional. Participó activamente en la redacción de los primeros documentos de la república y sirvió como ministro de Hacienda bajo el gobierno de Simón Bolívar, destacando por su finura intelectual y su visión de Estado.",
-                curiosidad: "Su célebre discurso sobre el clima de Lima y su influencia en los seres organizados demostró ante la comunidad científica internacional el alto nivel intelectual que poseían los pensadores peruanos de su época.",
+                role: "Escritor y Antropólogo",
+                dates: "1911 - 1969",
+                summary: "Novelista, poeta y etnólogo peruano, máximo referente del indigenismo literario, que dedicó su vida a expresar el alma profunda y la cosmovisión del mundo andino.",
+                aportes: "Construyó un puente literario inigualable entre la lengua quechua y la narrativa occidental moderna en obras maestras como 'Los ríos profundos' y 'Todas las sangres'.",
+                curiosidad: "Aprendió a hablar fluidamente en quechua antes que en castellano debido a que pasó su infancia al cuidado de comunidades indígenas.",
                 badgeColor: "bg-purple-100 text-purple-800"
             },
             {
                 id: 19,
+                name: "Daniel Alcides Carrión",
+                category: "cultura",
+                role: "Mártir de la Medicina",
+                dates: "1857 - 1885",
+                summary: "Estudiante de medicina de la Universidad Mayor de San Marcos que consagró su corta vida a investigar los misterios patológicos de la fiebre de la Oroya.",
+                aportes: "Se inoculó voluntariamente sangre infectada para experimentar en carne propia los síntomas y demostrar que la fiebre y la verruga peruana eran una misma enfermedad.",
+                curiosidad: "Llevó un diario médico con el registro científico exacto de los estragos de la infección en su organismo hasta sus últimos días.",
+                badgeColor: "bg-purple-100 text-purple-800"
+            },
+            {
+                id: 20,
+                name: "Hipólito Unanue",
+                category: "cultura",
+                role: "Médico y Sabio",
+                dates: "1755 - 1833",
+                summary: "Eminente sabio ariqueño, precursor de la ciencia médica peruana, fundador del Anfiteatro Anatómico y cofundador de la histórica Escuela de Medicina de San Fernando.",
+                aportes: "Impulsó de manera decisiva las ciencias biológicas, reformó la educación pública y participó activamente en los debates políticos de la independencia.",
+                curiosidad: "Fue ministro de Hacienda del libertador Simón Bolívar y destacó siempre por su mentalidad enciclopédica.",
+                badgeColor: "bg-purple-100 text-purple-800"
+            },
+            {
+                id: 21,
                 name: "Santa Rosa de Lima",
                 category: "cultura",
                 role: "Patrona de América",
                 dates: "1586 - 1617",
-                summary: "Isabel Flores de Oliva, universalmente conocida como Santa Rosa de Lima, nació en la Ciudad de los Reyes (Lima) en el seno de una familia de origen español. Desde su juventud destacó por su intensa vocación mística, dedicando su vida a la oración continua, el ayuno riguroso y la ayuda abnegada a los enfermos y menesterosos que acudían a su hogar en busca de auxilio material y espiritual.",
-                aportes: "Fue la primera persona nacida en el continente americano en ser canonizada oficialmente por la Iglesia Católica, convirtiéndose en la Patrona de Lima, del Perú, de América y de las Filipinas. Su vida se convirtió en un símbolo eterno de bondad incondicional, amor al prójimo y fervor espiritual, inspirando a millones de fieles en todo el mundo.",
-                curiosidad: "Construyó con sus propias manos una pequeña y austera ermita en el jardín de su casa familiar, donde pasaba días enteros rezando y realizando labores manuales de bordado para ayudar con el sustento económico de su hogar.",
+                summary: "Mística y religiosa criolla que consagró su existencia a la oración austera, el sacrificio personal y el auxilio constante a los enfermos y necesitados de Lima.",
+                aportes: "Fue la primera mujer nativa de América en ser canonizada por la Iglesia Católica, convirtiéndose en el símbolo eterno de bondad, pureza y devoción.",
+                curiosidad: "Construyó con sus propias manos una pequeña y austera ermita en el huerto de su hogar familiar para pasar largas horas meditando.",
                 badgeColor: "bg-purple-100 text-purple-800"
             }
         ];
@@ -361,6 +377,7 @@
                 let categoryName = '';
                 if(char.category === 'arequipa') categoryName = 'Arequipa / Hunter';
                 else if(char.category === 'nacional') categoryName = 'Héroe Nacional';
+                else if(char.category === 'heroinas') categoryName = 'Heroína y Precursora';
                 else if(char.category === 'cultura') categoryName = 'Letras y Ciencia';
 
                 const card = document.createElement('div');
@@ -404,6 +421,7 @@
             let categoryText = '';
             if(char.category === 'arequipa') categoryText = 'Arequipa / Hunter';
             else if(char.category === 'nacional') categoryText = 'Héroes Nacionales';
+            else if(char.category === 'heroinas') categoryText = 'Heroínas y Precursoras';
             else if(char.category === 'cultura') categoryText = 'Letras y Ciencia';
 
             document.getElementById('modalCategory').innerText = categoryText;

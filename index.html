@@ -14,24 +14,31 @@
             background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #991b1b 100%);
         }
         .card-hover {
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .card-hover:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
         }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-stone-50 text-stone-800 min-h-screen flex flex-col selection:bg-red-900 selection:text-white">
 
-    <!-- PANTALLA DE ACCESO EDITORIAL (EXAMEN INICIAL) -->
+    <!-- PANTALLA DE ACCESO INICIAL -->
     <div id="welcomeScreen" class="fixed inset-0 bg-stone-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-8 md:p-10 shadow-2xl border border-stone-200 text-center relative overflow-hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 md:p-10 shadow-2xl border border-stone-200 text-center relative overflow-hidden fade-in">
             <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-800 via-amber-600 to-red-900"></div>
             
             <span class="inline-block p-3 bg-red-50 text-red-800 rounded-2xl text-2xl mb-3 shadow-inner">🏛️</span>
             <h2 class="font-serif-title text-3xl font-bold text-stone-900 tracking-tight">Evaluación de Admisión</h2>
-            <p class="text-xs text-stone-500 mt-1.5 mb-8">Demuestre su rigor intelectual antes de acceder al archivo histórico de la nación.</p>
+            <p class="text-xs text-stone-500 mt-1.5 mb-8">Demuestra tus conocimientos para desbloquear el archivo histórico.</p>
             
             <form id="userSetupForm" onsubmit="startApp(event)" class="space-y-5 text-left">
                 <div>
@@ -40,24 +47,24 @@
                         class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-red-900 bg-stone-50 text-sm font-medium transition">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold text-stone-600 uppercase tracking-wider mb-1.5">Grado / Nivel Académico:</label>
+                    <label class="block text-[11px] font-bold text-stone-600 uppercase tracking-wider mb-1.5">Nivel Académico:</label>
                     <select id="userLevelInput" required 
                         class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-red-900 bg-stone-50 text-sm font-medium transition">
-                        <option value="" disabled>Seleccione su nivel...</option>
+                        <option value="" disabled>Selecciona tu nivel...</option>
                         <option value="primaria">Primaria (Nivel Fundamental)</option>
                         <option value="secundaria" selected>Secundaria (Nivel Estándar)</option>
-                        <option value="universidad">Superior / Universitario (Nivel Riguroso)</option>
+                        <option value="universidad">Superior / Universitario (Nivel Avanzado)</option>
                         <option value="docente">Cuerpo Docente / Especialista</option>
                     </select>
                 </div>
                 <button type="submit" class="w-full py-4 bg-red-900 hover:bg-red-950 text-white font-bold rounded-xl shadow-lg transition duration-200 text-xs uppercase tracking-widest cursor-pointer mt-4">
-                    Iniciar Evaluación ➔
+                    Comenzar Desafío 🚀
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- ENCABEZADO EDITORIAL -->
+    <!-- ENCABEZADO -->
     <header class="editorial-gradient text-white shadow-lg py-12 px-6 md:px-16 text-center relative overflow-hidden border-b border-red-950">
         <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
         <div class="relative z-10 max-w-4xl mx-auto">
@@ -65,28 +72,32 @@
                 <span>📜</span> Archivo Histórico Oficial
             </div>
             <h1 class="font-serif-title text-3xl md:text-5xl font-bold tracking-tight leading-tight">Patrimonio e Identidad del Perú</h1>
-            <p class="text-stone-300 mt-3 text-xs md:text-sm font-light max-w-2xl mx-auto">Repositorio curado de biografías eminentes, precursoras y gestas que configuraron la república.</p>
-            <div id="userGreetingBadge" class="mt-4 text-xs font-semibold text-amber-100/80 tracking-wide"></div>
+            <p class="text-stone-300 mt-3 text-xs md:text-sm font-light max-w-2xl mx-auto">Repositorio interactivo de biografías eminentes, precursoras y gestas de la nación.</p>
+            <div id="userGreetingBadge" class="mt-4 text-xs font-semibold text-amber-100/95 tracking-wide"></div>
         </div>
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-grow container mx-auto px-4 md:px-6 py-10 max-w-7xl">
         
-        <!-- SECCIÓN DE EXAMEN (BLOQUEO DE GALERÍA) -->
-        <section id="triviaSectionWrapper" class="max-w-3xl mx-auto bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-stone-200/80">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-stone-100 pb-5 gap-4">
+        <!-- SECCIÓN DE EXAMEN -->
+        <section id="triviaSectionWrapper" class="max-w-3xl mx-auto bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-stone-200/80 fade-in">
+            <!-- Barra de Progreso -->
+            <div class="w-full bg-stone-100 h-2 rounded-full mb-6 overflow-hidden">
+                <div id="progressBar" class="bg-red-900 h-full transition-all duration-300" style="width: 33%;"></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b border-stone-100 pb-5 gap-4">
                 <div>
-                    <span class="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-stone-100 text-stone-700 rounded-full">Evaluación Activa</span>
-                    <h2 class="font-serif-title text-2xl font-bold text-stone-900 mt-2">Cuestionario de Validación</h2>
-                    <p class="text-xs text-stone-500">El acceso a los archivos se habilitará tras aprobar la prueba.</p>
+                    <span class="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-red-50 text-red-900 rounded-full">Examen Interactivo</span>
+                    <h2 class="font-serif-title text-2xl font-bold text-stone-900 mt-2">Pon a prueba tus conocimientos</h2>
                 </div>
-                <div class="bg-stone-50 px-4 py-2.5 rounded-xl border border-stone-200 text-xs font-bold text-stone-700 tracking-wider">
-                    Ítem <span id="currentQuestionNum" class="text-red-900 font-extrabold text-sm">1</span> / <span id="totalTriviaQuestions">3</span>
+                <div class="bg-stone-50 px-4 py-2 rounded-xl border border-stone-200 text-xs font-bold text-stone-700">
+                    Pregunta <span id="currentQuestionNum" class="text-red-900 font-extrabold">1</span> de <span id="totalTriviaQuestions">3</span>
                 </div>
             </div>
 
-            <div id="triviaCard" class="bg-stone-50/70 p-6 md:p-8 rounded-2xl border border-stone-200">
+            <div id="triviaCard" class="bg-stone-50/70 p-6 md:p-8 rounded-2xl border border-stone-200 fade-in">
                 <p id="triviaQuestion" class="font-serif-title text-base md:text-lg font-bold text-stone-900 mb-6 leading-relaxed">Cargando reactivo...</p>
                 <div id="triviaOptions" class="grid grid-cols-1 gap-3">
                     <!-- Opciones dinámicas -->
@@ -96,24 +107,24 @@
             
             <div class="flex justify-end mt-6">
                 <button onclick="nextTriviaQuestion()" id="nextTriviaBtn" class="hidden px-8 py-3 bg-stone-900 hover:bg-stone-950 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition cursor-pointer shadow-md">
-                    Siguiente Reactivo ➔
+                    Siguiente Pregunta ➔
                 </button>
             </div>
         </section>
 
-        <!-- CONTENEDOR DE LA GALERÍA (OCULTO HASTA APROBAR) -->
-        <div id="galleryContentContainer" class="hidden space-y-8">
+        <!-- CONTENEDOR DE LA GALERÍA (OCULTO DURANTE EL EXAMEN) -->
+        <div id="galleryContentContainer" class="hidden space-y-8 fade-in">
             
-            <!-- Buscador y Filtros Institucionales -->
+            <!-- Buscador y Filtros -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col md:flex-row gap-4 justify-between items-center">
                 <div class="w-full md:w-1/2 relative">
-                    <input type="text" id="searchInput" placeholder="Buscar por nombre, rol o palabra clave..." 
+                    <input type="text" id="searchInput" placeholder="Filtra por nombre, rol o palabra clave..." 
                         class="w-full pl-12 pr-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-red-900 bg-stone-50 text-sm font-medium transition text-stone-800 placeholder:text-stone-400">
                     <span class="absolute left-4 top-3.5 text-stone-400 text-lg">🔍</span>
                 </div>
 
                 <div class="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
-                    <button onclick="filterCategory('todos')" class="filter-btn px-4 py-2.5 rounded-xl bg-red-900 text-white font-bold text-[11px] uppercase tracking-wider cursor-pointer transition shadow-sm">General</button>
+                    <button onclick="filterCategory('todos')" class="filter-btn px-4 py-2.5 rounded-xl bg-red-900 text-white font-bold text-[11px] uppercase tracking-wider cursor-pointer transition shadow-sm">Todos</button>
                     <button onclick="filterCategory('arequipa')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-stone-700 border border-stone-300 hover:bg-stone-50 font-bold text-[11px] uppercase tracking-wider cursor-pointer transition">Arequipa / Hunter</button>
                     <button onclick="filterCategory('nacional')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-stone-700 border border-stone-300 hover:bg-stone-50 font-bold text-[11px] uppercase tracking-wider cursor-pointer transition">Héroes Nacionales</button>
                     <button onclick="filterCategory('heroinas')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-stone-700 border border-stone-300 hover:bg-stone-50 font-bold text-[11px] uppercase tracking-wider cursor-pointer transition">👑 Heroínas y Precursoras</button>
@@ -121,7 +132,7 @@
                 </div>
             </div>
 
-            <!-- Cuadrícula de Archivos Históricos -->
+            <!-- Cuadrícula -->
             <div id="characterGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Tarjetas dinámicas -->
             </div>
@@ -133,20 +144,19 @@
             </div>
         </div>
 
-        <!-- Buzón Institucional de Propuestas (Google Forms) -->
+        <!-- Buzón Institucional (Google Forms) -->
         <section class="mt-20 bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-stone-200/80 max-w-3xl mx-auto text-center">
             <span class="text-2xl">📥</span>
             <h3 class="font-serif-title text-2xl font-bold text-stone-900 mt-2">Postulación de Nuevos Registros</h3>
-            <p class="text-xs text-stone-500 mt-1.5 mb-6 max-w-lg mx-auto">¿Considera que un personaje histórico fundamental requiere integración en el archivo? Envíe su propuesta mediante el canal oficial.</p>
+            <p class="text-xs text-stone-500 mt-1.5 mb-6 max-w-lg mx-auto">¿Consideras que algún personaje histórico debe agregarse al repositorio? Envía tu propuesta.</p>
             
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfrNWgPT7Y-_1R8kBGSkHax3gq0SQe_c6SGjvmFS5sW3WePcQ/viewform?usp=publish-editor" target="_blank" class="inline-block px-8 py-3.5 bg-stone-900 hover:bg-stone-950 text-white font-bold rounded-xl shadow-md transition duration-200 text-xs uppercase tracking-widest">
                 Acceder al Formulario Oficial ➔
             </a>
-            <p class="text-[10px] text-stone-400 mt-3">El enlace redirige al portal seguro de recepción académica.</p>
         </section>
     </main>
 
-    <!-- MODAL EDITORIAL DE BIOGRAFÍA -->
+    <!-- MODAL DE BIOGRAFÍA -->
     <div id="characterModal" class="fixed inset-0 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50 transition-opacity">
         <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-stone-200 overflow-hidden transform transition-all scale-95 opacity-0" id="modalContentContainer">
             <div class="editorial-gradient p-6 md:p-8 text-white relative">
@@ -184,7 +194,7 @@
         <p class="font-medium">Repositorio Académico Institucional de Divulgación Histórica 📚✨</p>
     </footer>
 
-    <!-- LÓGICA DE INTERACCIÓN -->
+    <!-- LÓGICA DE FUNCIONAMIENTO -->
     <script>
         let currentUser = { name: "Baby", level: "secundaria" };
         let currentTriviaIndex = 0;
@@ -227,7 +237,11 @@
 
         function loadTrivia() {
             const questions = triviaPool[currentUser.level] || triviaPool.secundaria;
+            const progress = ((currentTriviaIndex) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${Math.max(progress, 15)}%`;
+
             if (currentTriviaIndex >= questions.length) {
+                document.getElementById('progressBar').style.width = '100%';
                 const totalQ = questions.length;
                 const porcentaje = (score / totalQ) * 100;
                 let calificacionLetra = "C";
@@ -236,32 +250,32 @@
 
                 if (porcentaje === 100) {
                     calificacionLetra = "AD (Sobresaliente)";
-                    mensajeResultado = "Aprobación con honores académicos. Expediente habilitado.";
+                    mensajeResultado = "¡Excelente! Aprobación con honores académicos.";
                     colorBadge = "bg-emerald-50 text-emerald-900 border-emerald-200";
                 } else if (porcentaje >= 66) {
                     calificacionLetra = "A (Notable)";
-                    mensajeResultado = "Sólida comprensión del contenido histórico. Acceso concedido.";
+                    mensajeResultado = "Sólida comprensión del contenido histórico.";
                     colorBadge = "bg-blue-50 text-blue-900 border-blue-200";
                 } else if (porcentaje >= 33) {
                     calificacionLetra = "B (Satisfactorio)";
-                    mensajeResultado = "Aprobación estándar alcanzada. Acceso concedido.";
+                    mensajeResultado = "Aprobación estándar alcanzada.";
                     colorBadge = "bg-amber-50 text-amber-900 border-amber-200";
                 }
 
                 document.getElementById('triviaCard').innerHTML = `
-                    <div class="text-center py-8">
-                        <span class="text-4xl">📜</span>
-                        <h3 class="font-serif-title text-2xl font-bold text-stone-900 mt-2">Certificación de Evaluación</h3>
+                    <div class="text-center py-8 fade-in">
+                        <span class="text-5xl inline-block">🏆</span>
+                        <h3 class="font-serif-title text-2xl font-bold text-stone-900 mt-2">¡Evaluación Superada!</h3>
                         <p class="text-xs text-stone-500 mt-1">Candidato: <span class="font-bold text-stone-800">${currentUser.name}</span></p>
                         
                         <div class="my-5 inline-block px-5 py-2 rounded-xl text-xs font-extrabold uppercase border ${colorBadge}">
-                            Calificación Obtenida: ${calificacionLetra}
+                            Calificación: ${calificacionLetra}
                         </div>
                         <p class="text-xs font-bold text-stone-700">Aciertos: ${score} de ${totalQ} (${porcentaje.toFixed(0)}%)</p>
                         <p class="text-xs text-stone-500 mt-2 max-w-sm mx-auto">${mensajeResultado}</p>
                         
                         <button onclick="unlockGalleryAfterExam()" class="mt-8 px-8 py-3.5 bg-red-900 hover:bg-red-950 text-white font-bold rounded-xl text-xs uppercase tracking-widest transition cursor-pointer shadow-md">
-                            🏛️ Ingresar a la Galería Histórica
+                            ✨ Acceder a la Galería Histórica
                         </button>
                     </div>
                 `;
@@ -282,7 +296,7 @@
             
             currentQ.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
-                btn.className = "p-4 text-left bg-white border border-stone-200 hover:bg-red-50/50 hover:border-red-800 rounded-xl text-xs font-semibold text-stone-700 transition cursor-pointer shadow-xs flex items-center justify-between";
+                btn.className = "p-4 text-left bg-white border border-stone-200 hover:bg-red-50/60 hover:border-red-800 rounded-xl text-xs font-semibold text-stone-700 transition duration-200 cursor-pointer shadow-xs flex items-center justify-between";
                 btn.innerHTML = `<span>${opt}</span> <span class="text-stone-300 text-xs">➔</span>`;
                 btn.onclick = () => checkTriviaAnswer(idx, currentQ.correct, btn);
                 optionsContainer.appendChild(btn);
@@ -304,12 +318,12 @@
             if (selected === correct) {
                 score++;
                 clickedBtn.classList.add('bg-emerald-50', 'border-emerald-600', 'text-emerald-900');
-                feedback.className = "mt-5 text-xs font-bold text-emerald-900 bg-emerald-50 p-4 rounded-xl border border-emerald-200";
-                feedback.innerText = "✓ Validación correcta. Respuesta registrada con éxito.";
+                feedback.className = "mt-5 text-xs font-bold text-emerald-900 bg-emerald-50 p-4 rounded-xl border border-emerald-200 fade-in";
+                feedback.innerText = "✓ ¡Correcto! Avanzando al siguiente nivel.";
             } else {
                 clickedBtn.classList.add('bg-red-50', 'border-red-600', 'text-red-900');
-                feedback.className = "mt-5 text-xs font-bold text-red-900 bg-red-50 p-4 rounded-xl border border-red-200";
-                feedback.innerText = `✕ Validación incorrecta. El registro oficial correspondía a otra opción.`;
+                feedback.className = "mt-5 text-xs font-bold text-red-900 bg-red-50 p-4 rounded-xl border border-red-200 fade-in";
+                feedback.innerText = "✕ Incorrecto. Analiza mejor el siguiente reactivo.";
             }
 
             document.getElementById('nextTriviaBtn').classList.remove('hidden');
@@ -389,7 +403,7 @@
                 category: "arequipa",
                 role: "Historiador de la República",
                 dates: "1903 - 1980",
-                summary: "Nacido en Tacna y profundamente vinculado a la vida cultural de Arequipa (donde cursó estudios superiores y formó parte vital de la vida intelectual), Jorge Basadre es considerado el historiador peruano más importante del siglo XX. Dedicó absolutamente toda su existencia a estudiar, comprender y narrar la evolución social, política, económica y cultural del Perú independiente, superando la visión elitista de la historia para incluir al pueblo llano.",
+                summary: "Nacido en Tacna y profundamente vinculado a la vida cultural de Arequipa (donde cursó estudios superiores y formó parte vital de la vida intelectual), Jorge Basadre es considerado el historiador peruano más importante del siglo XX. Dedicó absolutamente toda sus existencia a estudiar, comprender y narrar la evolución social, política, económica y cultural del Perú independiente, superando la visión elitista de la historia para incluir al pueblo llano.",
                 aportes: "Su obra cumbre, 'Historia de la República del Perú' (que amplió y perfeccionó a lo largo de varias décadas en múltiples tomos), es la herramienta de consulta indispensable para entender nuestro devenir republicano. Además, como ministro de Educación impulsó de manera decisiva la modernización de las bibliotecas escolares y la protección del patrimonio cultural nacional.",
                 curiosidad: "Es el autor de la célebre frase: 'El Perú es un organismo dolido y a la vez prometedor', reflejando su visión optimista y realista sobre el futuro del país a pesar de sus múltiples crisis políticas.",
                 badgeColor: "bg-orange-100 text-orange-900"
@@ -597,7 +611,7 @@
                 else if(char.category === 'cultura') categoryName = 'Letras y Ciencia';
 
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl shadow-xs border border-stone-200/80 p-6 flex flex-col justify-between text-center card-hover";
+                card.className = "bg-white rounded-2xl shadow-xs border border-stone-200/80 p-6 flex flex-col justify-between text-center card-hover fade-in";
                 card.innerHTML = `
                     <div>
                         <span class="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${char.badgeColor} inline-block mb-4">${categoryName}</span>
@@ -636,7 +650,7 @@
 
             let categoryText = '';
             if(char.category === 'arequipa') categoryText = 'Arequipa / Hunter';
-            else if(char.category === 'nacional') categoryText = 'Héroe Nacional';
+            else if(char.category === 'nacional') categoryText = 'Héroes Nacionales';
             else if(char.category === 'heroinas') categoryText = 'Heroínas y Precursoras';
             else if(char.category === 'cultura') categoryText = 'Letras y Ciencia';
 

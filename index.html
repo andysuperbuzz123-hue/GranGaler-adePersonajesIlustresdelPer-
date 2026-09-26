@@ -3,115 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Descubre a los Genios del Perú! 🇵🇪 | Galería Épica</title>
+    <title>Galería Histórica del Perú 🇵🇪 | Colección Académica</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; }
-        .hero-gradient {
-            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #b91c1c 100%);
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif-title { font-family: 'Playfair Display', serif; }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #991b1b 100%);
+        }
+        .card-hover {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
         }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-stone-50 text-stone-800 min-h-screen flex flex-col selection:bg-red-900 selection:text-white">
 
-    <!-- Encabezado con Título Llamativo -->
-    <header class="hero-gradient text-white shadow-xl py-12 px-4 md:px-12 text-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <!-- PANTALLA DE ACCESO EDITORIAL (EXAMEN INICIAL) -->
+    <div id="welcomeScreen" class="fixed inset-0 bg-stone-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 md:p-10 shadow-2xl border border-stone-200 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-800 via-amber-600 to-red-900"></div>
+            
+            <span class="inline-block p-3 bg-red-50 text-red-800 rounded-2xl text-2xl mb-3 shadow-inner">🏛️</span>
+            <h2 class="font-serif-title text-3xl font-bold text-stone-900 tracking-tight">Evaluación de Admisión</h2>
+            <p class="text-xs text-stone-500 mt-1.5 mb-8">Demuestre su rigor intelectual antes de acceder al archivo histórico de la nación.</p>
+            
+            <form id="userSetupForm" onsubmit="startApp(event)" class="space-y-5 text-left">
+                <div>
+                    <label class="block text-[11px] font-bold text-stone-600 uppercase tracking-wider mb-1.5">Investigador / Estudiante:</label>
+                    <input type="text" id="userNameInput" required value="Baby" placeholder="Ej. Baby" 
+                        class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-red-900 bg-stone-50 text-sm font-medium transition">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-stone-600 uppercase tracking-wider mb-1.5">Grado / Nivel Académico:</label>
+                    <select id="userLevelInput" required 
+                        class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-red-900 bg-stone-50 text-sm font-medium transition">
+                        <option value="" disabled>Seleccione su nivel...</option>
+                        <option value="primaria">Primaria (Nivel Fundamental)</option>
+                        <option value="secundaria" selected>Secundaria (Nivel Estándar)</option>
+                        <option value="universidad">Superior / Universitario (Nivel Riguroso)</option>
+                        <option value="docente">Cuerpo Docente / Especialista</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-4 bg-red-900 hover:bg-red-950 text-white font-bold rounded-xl shadow-lg transition duration-200 text-xs uppercase tracking-widest cursor-pointer mt-4">
+                    Iniciar Evaluación ➔
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ENCABEZADO EDITORIAL -->
+    <header class="editorial-gradient text-white shadow-lg py-12 px-6 md:px-16 text-center relative overflow-hidden border-b border-red-950">
+        <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
         <div class="relative z-10 max-w-4xl mx-auto">
-            <span class="bg-amber-400 text-amber-950 text-xs font-extrabold uppercase px-4 py-1.5 rounded-full shadow-md tracking-wider">🔥 Enciclopedia Escolar Interactiva</span>
-            <h1 class="text-3xl md:text-5xl font-extrabold mt-4 tracking-tight leading-tight">🚀 ¡Descubre a los Genios y Héroes que Hicieron Historia en el Perú!</h1>
-            <p class="text-red-100 mt-3 text-sm md:text-base font-medium">Explora biografías épicas, datos insólitos y el legado de las mentes más brillantes de nuestra patria.</p>
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-amber-200 border border-white/10 mb-4">
+                <span>📜</span> Archivo Histórico Oficial
+            </div>
+            <h1 class="font-serif-title text-3xl md:text-5xl font-bold tracking-tight leading-tight">Patrimonio e Identidad del Perú</h1>
+            <p class="text-stone-300 mt-3 text-xs md:text-sm font-light max-w-2xl mx-auto">Repositorio curado de biografías eminentes, precursoras y gestas que configuraron la república.</p>
+            <div id="userGreetingBadge" class="mt-4 text-xs font-semibold text-amber-100/80 tracking-wide"></div>
         </div>
     </header>
 
-    <!-- Contenido Principal -->
-    <main class="flex-grow container mx-auto px-4 py-8 max-w-7xl">
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow container mx-auto px-4 md:px-6 py-10 max-w-7xl">
         
-        <!-- Buscador y Filtros -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
-            <div class="w-full md:w-1/2 relative">
-                <input type="text" id="searchInput" placeholder="Busca por nombre, rol o palabra clave (ej. Grau, Moyano, Heroínas...)" 
-                    class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-50 text-slate-800 font-medium transition shadow-inner">
-                <span class="absolute left-4 top-3.5 text-xl">🔍</span>
+        <!-- SECCIÓN DE EXAMEN (BLOQUEO DE GALERÍA) -->
+        <section id="triviaSectionWrapper" class="max-w-3xl mx-auto bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-stone-200/80">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-stone-100 pb-5 gap-4">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-stone-100 text-stone-700 rounded-full">Evaluación Activa</span>
+                    <h2 class="font-serif-title text-2xl font-bold text-stone-900 mt-2">Cuestionario de Validación</h2>
+                    <p class="text-xs text-stone-500">El acceso a los archivos se habilitará tras aprobar la prueba.</p>
+                </div>
+                <div class="bg-stone-50 px-4 py-2.5 rounded-xl border border-stone-200 text-xs font-bold text-stone-700 tracking-wider">
+                    Ítem <span id="currentQuestionNum" class="text-red-900 font-extrabold text-sm">1</span> / <span id="totalTriviaQuestions">3</span>
+                </div>
             </div>
 
-            <div class="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
-                <button onclick="filterCategory('todos')" class="filter-btn px-4 py-2.5 rounded-xl bg-red-700 text-white font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-md">Todos</button>
-                <button onclick="filterCategory('arequipa')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-sm">Arequipa / Hunter</button>
-                <button onclick="filterCategory('nacional')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-sm">Héroes Nacionales</button>
-                <button onclick="filterCategory('heroinas')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-sm">👑 Heroínas y Precursoras</button>
-                <button onclick="filterCategory('cultura')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider cursor-pointer transition shadow-sm">Letras y Ciencia</button>
+            <div id="triviaCard" class="bg-stone-50/70 p-6 md:p-8 rounded-2xl border border-stone-200">
+                <p id="triviaQuestion" class="font-serif-title text-base md:text-lg font-bold text-stone-900 mb-6 leading-relaxed">Cargando reactivo...</p>
+                <div id="triviaOptions" class="grid grid-cols-1 gap-3">
+                    <!-- Opciones dinámicas -->
+                </div>
+                <div id="triviaFeedback" class="mt-5 text-xs font-bold hidden p-4 rounded-xl border"></div>
             </div>
-        </div>
-
-        <!-- Cuadrícula de Tarjetas -->
-        <div id="characterGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Las tarjetas se cargarán dinámicamente -->
-        </div>
-
-        <!-- Mensaje si no hay resultados -->
-        <div id="noResults" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200 shadow-sm mt-4">
-            <span class="text-4xl">🤔</span>
-            <p class="text-xl font-bold text-slate-700 mt-3">No encontramos resultados para tu búsqueda</p>
-        </div>
-
-        <!-- Sección de Sugerencias con tu Formulario Real -->
-        <section class="mt-16 bg-white rounded-3xl p-8 shadow-sm border border-slate-200 max-w-3xl mx-auto text-center">
-            <span class="text-3xl">💡</span>
-            <h3 class="text-2xl font-bold text-slate-900 mt-2">¿Falta algún personaje histórico?</h3>
-            <p class="text-sm text-slate-600 mt-1 mb-6">Ayúdanos a completar la galería enviando tu propuesta mediante nuestro formulario oficial.</p>
             
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfrNWgPT7Y-_1R8kBGSkHax3gq0SQe_c6SGjvmFS5sW3WePcQ/viewform?usp=publish-editor" target="_blank" class="inline-block px-8 py-4 bg-red-700 hover:bg-red-800 text-white font-extrabold rounded-2xl shadow-md transition duration-200 text-sm tracking-wide">
-                Sugerir un Personaje 🚀
+            <div class="flex justify-end mt-6">
+                <button onclick="nextTriviaQuestion()" id="nextTriviaBtn" class="hidden px-8 py-3 bg-stone-900 hover:bg-stone-950 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition cursor-pointer shadow-md">
+                    Siguiente Reactivo ➔
+                </button>
+            </div>
+        </section>
+
+        <!-- CONTENEDOR DE LA GALERÍA (OCULTO HASTA APROBAR) -->
+        <div id="galleryContentContainer" class="hidden space-y-8">
+            
+            <!-- Buscador y Filtros Institucionales -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col md:flex-row gap-4 justify-between items-center">
+                <div class="w-full md:w-1/2 relative">
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre, rol o palabra clave..." 
+                        class="w-full pl-12 pr-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-red-900 bg-stone-50 text-sm font-medium transition text-stone-800 placeholder:text-stone-400">
+                    <span class="absolute left-4 top-3.5 text-stone-400 text-lg">🔍</span>
+                </div>
+
+                <div class="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
+                    <button onclick="filterCategory('todos')" class="filter-btn px-4 py-2.5 rounded-xl bg-red-900 text-white font-bold text-[11px] uppercase tracking-wider cursor-pointer transition shadow-sm">General</button>
+                    <button onclick="filterCategory('arequipa')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-stone-700 border border-stone-300 hover:bg-stone-50 font-bold text-[11px] uppercase tracking-wider cursor-pointer transition">Arequipa / Hunter</button>
+                    <button onclick="filterCategory('nacional')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-stone-700 border border-stone-300 hover:bg-stone-50 font-bold text-[11px] uppercase tracking-wider cursor-pointer transition">Héroes Nacionales</button>
+                    <button onclick="filterCategory('heroinas')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-stone-700 border border-stone-300 hover:bg-stone-50 font-bold text-[11px] uppercase tracking-wider cursor-pointer transition">👑 Heroínas y Precursoras</button>
+                    <button onclick="filterCategory('cultura')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-stone-700 border border-stone-300 hover:bg-stone-50 font-bold text-[11px] uppercase tracking-wider cursor-pointer transition">Letras y Ciencia</button>
+                </div>
+            </div>
+
+            <!-- Cuadrícula de Archivos Históricos -->
+            <div id="characterGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Tarjetas dinámicas -->
+            </div>
+
+            <!-- Mensaje sin resultados -->
+            <div id="noResults" class="hidden text-center py-16 bg-white rounded-2xl border border-stone-200 shadow-sm mt-4">
+                <span class="text-3xl">📂</span>
+                <p class="font-serif-title text-lg font-bold text-stone-700 mt-2">No se encontraron registros coincidentes</p>
+            </div>
+        </div>
+
+        <!-- Buzón Institucional de Propuestas (Google Forms) -->
+        <section class="mt-20 bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-stone-200/80 max-w-3xl mx-auto text-center">
+            <span class="text-2xl">📥</span>
+            <h3 class="font-serif-title text-2xl font-bold text-stone-900 mt-2">Postulación de Nuevos Registros</h3>
+            <p class="text-xs text-stone-500 mt-1.5 mb-6 max-w-lg mx-auto">¿Considera que un personaje histórico fundamental requiere integración en el archivo? Envíe su propuesta mediante el canal oficial.</p>
+            
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfrNWgPT7Y-_1R8kBGSkHax3gq0SQe_c6SGjvmFS5sW3WePcQ/viewform?usp=publish-editor" target="_blank" class="inline-block px-8 py-3.5 bg-stone-900 hover:bg-stone-950 text-white font-bold rounded-xl shadow-md transition duration-200 text-xs uppercase tracking-widest">
+                Acceder al Formulario Oficial ➔
             </a>
-            <p class="text-[11px] text-slate-400 mt-3">El formulario se abrirá de forma segura en una pestaña nueva.</p>
+            <p class="text-[10px] text-stone-400 mt-3">El enlace redirige al portal seguro de recepción académica.</p>
         </section>
     </main>
 
-    <!-- Modal / Apartado de Información Ampliada -->
-    <div id="characterModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50 transition-opacity">
-        <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden transform transition-all scale-95 opacity-0" id="modalContentContainer">
-            <div class="hero-gradient p-6 text-white relative">
-                <button onclick="closeModal()" class="absolute right-4 top-4 bg-white/20 hover:bg-white/30 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold transition cursor-pointer">✕</button>
-                <span id="modalCategory" class="text-xs font-extrabold uppercase px-3 py-1 rounded-full bg-amber-400 text-amber-950 inline-block mb-2"></span>
-                <h2 id="modalName" class="text-2xl md:text-3xl font-extrabold tracking-tight"></h2>
-                <p id="modalRole" class="text-red-100 text-xs md:text-sm font-semibold mt-1"></p>
+    <!-- MODAL EDITORIAL DE BIOGRAFÍA -->
+    <div id="characterModal" class="fixed inset-0 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden z-50 transition-opacity">
+        <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-stone-200 overflow-hidden transform transition-all scale-95 opacity-0" id="modalContentContainer">
+            <div class="editorial-gradient p-6 md:p-8 text-white relative">
+                <button onclick="closeModal()" class="absolute right-5 top-5 bg-white/10 hover:bg-white/25 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold transition cursor-pointer">✕</button>
+                <span id="modalCategory" class="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-400 text-amber-950 inline-block mb-3"></span>
+                <h2 id="modalName" class="font-serif-title text-2xl md:text-3xl font-bold tracking-tight"></h2>
+                <p id="modalRole" class="text-red-200 text-xs font-medium mt-1"></p>
             </div>
-            <div class="p-6 md:p-8 space-y-6 max-h-[70vh] overflow-y-auto">
-                <div class="flex items-center justify-between bg-slate-100 px-4 py-3 rounded-xl text-xs font-bold text-slate-700">
-                    <span>📅 Época Histórica / Fechas:</span>
-                    <span id="modalDates" class="text-red-700 text-sm"></span>
+            <div class="p-6 md:p-8 space-y-6 max-h-[65vh] overflow-y-auto bg-white text-stone-700">
+                <div class="flex items-center justify-between bg-stone-50 px-4 py-3 rounded-xl text-xs font-bold border border-stone-200/60">
+                    <span class="text-stone-500">Cronología Vital:</span>
+                    <span id="modalDates" class="text-red-900"></span>
                 </div>
                 <div>
-                    <h4 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2">📖 Biografía e Historia Detallada</h4>
-                    <p id="modalSummary" class="text-sm text-slate-700 leading-relaxed text-justify"></p>
+                    <h4 class="text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-2">Reseña Biográfica</h4>
+                    <p id="modalSummary" class="text-xs md:text-sm leading-relaxed text-stone-600 text-justify"></p>
                 </div>
                 <div>
-                    <h4 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2">🌟 Gran Legado y Aportes Históricos</h4>
-                    <p id="modalAportes" class="text-sm text-slate-700 leading-relaxed text-justify"></p>
+                    <h4 class="text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-2">Legado e Incidencia Histórica</h4>
+                    <p id="modalAportes" class="text-xs md:text-sm leading-relaxed text-stone-600 text-justify"></p>
                 </div>
-                <div class="bg-amber-50 p-5 rounded-2xl border border-amber-200">
-                    <h4 class="text-xs font-extrabold text-amber-900 uppercase tracking-wider mb-2">💡 Dato Curioso o Sabías que...</h4>
-                    <p id="modalCuriosidad" class="text-xs md:text-sm text-amber-800 leading-relaxed text-justify"></p>
+                <div class="bg-amber-50/60 p-5 rounded-2xl border border-amber-200/60">
+                    <h4 class="text-[11px] font-bold text-amber-900 uppercase tracking-widest mb-1.5">Nota Documental / Curiosidad</h4>
+                    <p id="modalCuriosidad" class="text-xs md:text-sm text-amber-900/90 leading-relaxed text-justify"></p>
                 </div>
             </div>
-            <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 text-right">
-                <button onclick="closeModal()" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition cursor-pointer shadow-sm">Cerrar Ventana</button>
+            <div class="bg-stone-50 px-6 py-4 border-t border-stone-200/80 text-right">
+                <button onclick="closeModal()" class="px-6 py-2 bg-stone-800 hover:bg-stone-900 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer">Cerrar Expediente</button>
             </div>
         </div>
     </div>
 
-    <!-- Pie de página -->
-    <footer class="bg-slate-900 text-slate-400 text-center py-6 text-sm mt-auto border-t border-slate-800">
-        <p class="font-medium">Plataforma escolar interactiva diseñada para estudiantes y docentes del Perú 📚✨</p>
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-stone-900 text-stone-400 text-center py-6 text-xs mt-auto border-t border-stone-800 tracking-wide">
+        <p class="font-medium">Repositorio Académico Institucional de Divulgación Histórica 📚✨</p>
     </footer>
 
-    <!-- Script JavaScript con Base de Datos Completa -->
+    <!-- LÓGICA DE INTERACCIÓN -->
     <script>
+        let currentUser = { name: "Baby", level: "secundaria" };
+        let currentTriviaIndex = 0;
+        let score = 0;
+
+        const triviaPool = {
+            primaria: [
+                { q: "¿Quién es reconocido históricamente como el 'Caballero de los Mares'?", options: ["Miguel Grau", "Francisco Bolognesi", "Alfonso Ugarte", "Túpac Amaru II"], correct: 0 },
+                { q: "¿En qué mes se conmemora tradicionalmente la festividad de Santa Rosa de Lima?", options: ["Julio", "Agosto", "Octubre", "Diciembre"], correct: 1 },
+                { q: "¿A qué región del sur del Perú pertenecía el insigne poeta Mariano Melgar?", options: ["Cusco", "Puno", "Arequipa", "Tacna"], correct: 2 }
+            ],
+            secundaria: [
+                { q: "¿Cuál fue el manifiesto ideológico redactado por Juan Pablo Vizcardo y Guzmán?", options: ["Los ríos profundos", "Carta a los españoles americanos", "Las revoluciones de Arequipa", "El caballero Carmelo"], correct: 1 },
+                { q: "¿Qué sabio peruano es reconocido mundialmente como precursor de la astronáutica y propulsión cohetera?", options: ["Daniel Alcides Carrión", "Hipólito Unanue", "Pedro Paulet", "Jorge Basadre"], correct: 2 },
+                { q: "¿Qué insigne lideresa indígena organizó la logística de la gran rebelión de 1780 junto a Túpac Amaru II?", options: ["María Parado de Bellido", "Micaela Bastidas", "María Elena Moyano", "Juana Alarco de Dammert"], correct: 1 }
+            ],
+            universidad: [
+                { q: "¿Qué corriente filosófica del siglo XVIII fundamentó teóricamente la prédica separatista de los precursores criollos?", options: ["La Ilustración y el racionalismo europeo", "El existencialismo moderno", "El positivismo industrial", "El escolasticismo medieval"], correct: 0 },
+                { q: "¿Qué historiador republicano consagró su vida académica a la monumental obra 'Historia de la República del Perú'?", options: ["Alberto Guillén", "Jorge Basadre", "Deán Valdivia", "José María Arguedas"], correct: 1 },
+                { q: "¿Qué trascendencia científica tuvo la automedicación experimental ejecutada por Daniel Alcides Carrión en 1885?", options: ["Identificar la cura definitiva de la tuberculosis", "Demostrar la identidad patológica entre la fiebre de la Oroya y la verruga peruana", "Sintetizar la quinina natural", "Desarrollar anestesia local"], correct: 1 }
+            ],
+            docente: [
+                { q: "¿Cuál es el valor documental primordial del texto historiográfico 'Las Revoluciones de Arequipa'?", options: ["Registrar con rigor crítico el proceso de formación cívica y política del sur", "Exponer la geografía económica minera del virreinato", "Criticar los cánones de la poesía colonial", "Recopilar tradiciones orales indígenas"], correct: 0 },
+                { q: "¿Cuál fue el aporte institucional trascendental de Juana Alarco de Dammert en el ámbito social peruano?", options: ["La instauración de los primeros jardines de infancia y la protección de la infancia", "La fundación del primer banco estatal", "La dirección de la primera escuela militar femenina", "La redacción del código civil"], correct: 0 },
+                { q: "¿Qué ruptura estética promovió Abraham Valdelomar a través del movimiento y revista Colónida?", options: ["La renovación vanguardista frente al academicismo formal y anquilosado", "El retorno estricto al clasicismo español", "La supresión absoluta de la prosa narrativa", "El indigenismo dogmático"], correct: 0 }
+            ]
+        };
+
+        function startApp(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('userNameInput').value.trim();
+            currentUser.name = nameInput !== "" ? nameInput : "Baby";
+            currentUser.level = document.getElementById('userLevelInput').value;
+
+            document.getElementById('userGreetingBadge').innerText = `Investigador(a): ${currentUser.name} • Perfil: ${currentUser.level.toUpperCase()}`;
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('galleryContentContainer').classList.add('hidden');
+            loadTrivia();
+        }
+
+        function loadTrivia() {
+            const questions = triviaPool[currentUser.level] || triviaPool.secundaria;
+            if (currentTriviaIndex >= questions.length) {
+                const totalQ = questions.length;
+                const porcentaje = (score / totalQ) * 100;
+                let calificacionLetra = "C";
+                let mensajeResultado = "Se sugiere reestudiar los anales históricos.";
+                let colorBadge = "bg-red-100 text-red-900 border-red-200";
+
+                if (porcentaje === 100) {
+                    calificacionLetra = "AD (Sobresaliente)";
+                    mensajeResultado = "Aprobación con honores académicos. Expediente habilitado.";
+                    colorBadge = "bg-emerald-50 text-emerald-900 border-emerald-200";
+                } else if (porcentaje >= 66) {
+                    calificacionLetra = "A (Notable)";
+                    mensajeResultado = "Sólida comprensión del contenido histórico. Acceso concedido.";
+                    colorBadge = "bg-blue-50 text-blue-900 border-blue-200";
+                } else if (porcentaje >= 33) {
+                    calificacionLetra = "B (Satisfactorio)";
+                    mensajeResultado = "Aprobación estándar alcanzada. Acceso concedido.";
+                    colorBadge = "bg-amber-50 text-amber-900 border-amber-200";
+                }
+
+                document.getElementById('triviaCard').innerHTML = `
+                    <div class="text-center py-8">
+                        <span class="text-4xl">📜</span>
+                        <h3 class="font-serif-title text-2xl font-bold text-stone-900 mt-2">Certificación de Evaluación</h3>
+                        <p class="text-xs text-stone-500 mt-1">Candidato: <span class="font-bold text-stone-800">${currentUser.name}</span></p>
+                        
+                        <div class="my-5 inline-block px-5 py-2 rounded-xl text-xs font-extrabold uppercase border ${colorBadge}">
+                            Calificación Obtenida: ${calificacionLetra}
+                        </div>
+                        <p class="text-xs font-bold text-stone-700">Aciertos: ${score} de ${totalQ} (${porcentaje.toFixed(0)}%)</p>
+                        <p class="text-xs text-stone-500 mt-2 max-w-sm mx-auto">${mensajeResultado}</p>
+                        
+                        <button onclick="unlockGalleryAfterExam()" class="mt-8 px-8 py-3.5 bg-red-900 hover:bg-red-950 text-white font-bold rounded-xl text-xs uppercase tracking-widest transition cursor-pointer shadow-md">
+                            🏛️ Ingresar a la Galería Histórica
+                        </button>
+                    </div>
+                `;
+                document.getElementById('currentQuestionNum').innerText = totalQ;
+                document.getElementById('nextTriviaBtn').classList.add('hidden');
+                return;
+            }
+
+            const questionsArr = triviaPool[currentUser.level] || triviaPool.secundaria;
+            const currentQ = questionsArr[currentTriviaIndex];
+            
+            document.getElementById('currentQuestionNum').innerText = currentTriviaIndex + 1;
+            document.getElementById('totalTriviaQuestions').innerText = questionsArr.length;
+            document.getElementById('triviaQuestion').innerText = currentQ.q;
+            
+            const optionsContainer = document.getElementById('triviaOptions');
+            optionsContainer.innerHTML = '';
+            
+            currentQ.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "p-4 text-left bg-white border border-stone-200 hover:bg-red-50/50 hover:border-red-800 rounded-xl text-xs font-semibold text-stone-700 transition cursor-pointer shadow-xs flex items-center justify-between";
+                btn.innerHTML = `<span>${opt}</span> <span class="text-stone-300 text-xs">➔</span>`;
+                btn.onclick = () => checkTriviaAnswer(idx, currentQ.correct, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('triviaFeedback').classList.add('hidden');
+            document.getElementById('nextTriviaBtn').classList.add('hidden');
+        }
+
+        function checkTriviaAnswer(selected, correct, clickedBtn) {
+            const feedback = document.getElementById('triviaFeedback');
+            feedback.classList.remove('hidden');
+            
+            const optionsButtons = document.getElementById('triviaOptions').children;
+            for (let btn of optionsButtons) {
+                btn.disabled = true;
+            }
+
+            if (selected === correct) {
+                score++;
+                clickedBtn.classList.add('bg-emerald-50', 'border-emerald-600', 'text-emerald-900');
+                feedback.className = "mt-5 text-xs font-bold text-emerald-900 bg-emerald-50 p-4 rounded-xl border border-emerald-200";
+                feedback.innerText = "✓ Validación correcta. Respuesta registrada con éxito.";
+            } else {
+                clickedBtn.classList.add('bg-red-50', 'border-red-600', 'text-red-900');
+                feedback.className = "mt-5 text-xs font-bold text-red-900 bg-red-50 p-4 rounded-xl border border-red-200";
+                feedback.innerText = `✕ Validación incorrecta. El registro oficial correspondía a otra opción.`;
+            }
+
+            document.getElementById('nextTriviaBtn').classList.remove('hidden');
+        }
+
+        function nextTriviaQuestion() {
+            currentTriviaIndex++;
+            loadTrivia();
+        }
+
+        function unlockGalleryAfterExam() {
+            document.getElementById('triviaSectionWrapper').classList.add('hidden');
+            document.getElementById('galleryContentContainer').classList.remove('hidden');
+            renderCharacters();
+        }
+
+        // --- BASE DE DATOS DE PERSONAJES ---
         const characters = [
-            // --- AREQUIPA / HUNTER ---
             {
                 id: 1,
                 name: "Juan Pablo Vizcardo y Guzmán",
@@ -121,7 +337,7 @@
                 summary: "Nacido en Pampacolca (Arequipa), fue un destacado sacerdote jesuita que ingresó a la orden a temprana edad. Tras la expulsión de los jesuitas en 1767, debió exiliarse en Europa. Desde el destierro, dedicó su intelecto a analizar el descontento colonial, convirtiéndose en el cerebro y primer gran ideólogo que argumentó la necesidad urgente de la separación definitiva de España, defendiendo que América pertenecía por derecho natural a los americanos.",
                 aportes: "Su obra cumbre es la histórica 'Carta a los españoles americanos', escrita alrededor de 1792. En este documento magistral argumentó que España había oprimido sistemáticamente a los nativos e hijos de españoles nacidos en América, privándolos de sus derechos y riquezas. Su carta fue traducida, impresa y distribuida clandestinamente por Francisco de Miranda, convirtiéndose en el manifiesto teórico fundamental que inspiró a los libertadores de todo el continente.",
                 curiosidad: "Pese a vivir la mayor parte de su vida adulta en el viejo continente alejado de su tierra natal, su amor por el Perú se mantuvo intacto. Tras su fallecimiento en Londres, todos sus valiosos manuscritos y borradores pasaron a manos de Francisco de Miranda, quien se encargó de publicarlos en español y difundirlos por América del Sur.",
-                badgeColor: "bg-orange-100 text-orange-800"
+                badgeColor: "bg-orange-100 text-orange-900"
             },
             {
                 id: 2,
@@ -132,7 +348,7 @@
                 summary: "Mariano Melgar Valdivieso fue un brillante poeta y patriota arequipeño, considerado un niño prodigio que aprendió a leer a los tres años y dominaba el latín, inglés, francés y italiano de forma autodidacta. En su juventud se enamoró apasionadamente de María Santos Corrales (la inmortal 'Silvia'), amor que marcó profundamente su producción literaria. Al estallar los movimientos independentistas, su sensibilidad poética se transformó en un ferviente compromiso patriótico, uniéndose al ejército de Mateo Pumacahua para luchar por la libertad del sur andino.",
                 aportes: "Es considerado el creador del yaraví peruano, una fusión magistral entre la poesía culta española y el sentimiento musical y melancólico del harawi indígena prehispánico. Entre sus obras destacan sus famosas 'Elegías' y sus odas patrióticas. Entregó su vida con valor inquebrantable tras ser capturado y fusilado por las fuerzas realistas en la Batalla de Umachiri a la temprana edad de 24 años.",
                 curiosidad: "A los doce años de edad ingresó al Seminario Conciliar de San Jerónimo en Arequipa y, siendo aún un adolescente, demostró tal nivel de erudición que fue designado profesor de latín y filosofía dentro de la misma institución.",
-                badgeColor: "bg-orange-100 text-orange-800"
+                badgeColor: "bg-orange-100 text-orange-900"
             },
             {
                 id: 3,
@@ -143,7 +359,7 @@
                 summary: "Pedro Eleodoro Paulet Mostajo nació en Arequipa y fue un hombre polímata excepcional: científico, ingeniero, arquitecto, diplomático, periodista y visionario. Desde su juventud en Arequipa quedó fascinado por el vuelo de las aves y la posibilidad de que el ser humano pudiera viajar fuera de la atmósfera terrestre. Estudió ingeniería y química en Europa gracias a una beca otorgada por el gobierno peruano, recorriendo laboratorios y universidades de vanguardia donde desarrolló sus revolucionarias teorías sobre astronáutica.",
                 aportes: "Inventó el primer motor de propulsión a cohete de combustible líquido (utilizando tetróxido de nitrógeno y gasolina) en la década de 1890, y diseñó la primera nave espacial precursora propulsada por cohetes, estructurada con cámaras de combustión múltiples. Por estos descubrimientos fundamentales, la Federación Aeronáutica Internacional y la historia mundial de la ciencia lo reconocen legítimamente como el 'Padre de la Astronáutica' y pionero indiscutible de la era espacial moderna.",
                 curiosidad: "Durante su infancia en Arequipa, debido a la falta de recursos para comprar juguetes científicos, fabricaba sus propios cohetes experimentales con pólvora y cañas de carrizo, lanzándolos en los campos abiertos de la campiña arequipeña ante la sorpresa de sus vecinos.",
-                badgeColor: "bg-orange-100 text-orange-800"
+                badgeColor: "bg-orange-100 text-orange-900"
             },
             {
                 id: 4,
@@ -154,7 +370,7 @@
                 summary: "Juan Gualberto Valdivia y Rojo, conocido popularmente como el Deán Valdivia, fue un sacerdote, eclesiástico, jurisconsulto, historiador y político arequipeño de carácter fuerte, inquebrantable y profundamente defensor de la justicia social y los derechos ciudadanos. A lo largo de su larga vida, fue testigo y actor principal de la tumultuosa historia de la naciente República del Perú, oponiéndose firmemente a las dictaduras militares, los abusos de autoridad y las arbitrariedades de los gobernantes de turno.",
                 aportes: "Su obra cumbre como historiador es 'Las Revoluciones de Arequipa', un texto monumental y riguroso que detalla la participación crucial de la región sur en la consolidación de la república. Como docente y rector del Colegio Nacional de la Independencia Americana, formó a generaciones enteras bajo estrictos valores cívicos y democráticos.",
                 curiosidad: "Debido a su lengua afilada, sus artículos periodísticos punzantes y sus enérgicos sermones criticando la tiranía, sufrió múltiples destierros a lo largo de su vida, exiliándose temporalmente en países vecinos de donde siempre regresaba con mayor energía para seguir defendiendo sus ideales.",
-                badgeColor: "bg-orange-100 text-orange-800"
+                badgeColor: "bg-orange-100 text-orange-900"
             },
             {
                 id: 5,
@@ -165,7 +381,7 @@
                 summary: "Alberto Guillén fue uno de los poetas más audaces y renovadores de la literatura arequipeña y peruana del siglo XX. Perteneció a la generación vanguardista que sacudió las estructuras literarias tradicionales del país, buscando nuevas formas de expresión estética influenciadas por el modernismo europeo, el ultraísmo y la revalorización de la identidad criolla y andina. Su pluma destacó por la fuerza verbal, la ironía fina y un profundo lirismo intimista.",
                 aportes: "Fundó y dirigió revistas literarias cruciales para la difusión del pensamiento moderno en provincias y Lima. Escribió poemarios memorables como 'La linterna de Diógenes' y antologías poéticas que recopilaron lo mejor del romanticismo y el modernismo sureño, sirviendo de puente generacional para los nuevos talentos de las letras nacionales.",
                 curiosidad: "Mantuvo una estrecha y enriquecedora correspondencia intelectual con los máximos pensadores de su época, incluyendo al célebre ensayista peruano José Carlos Mariátegui y al poeta orquestador Abraham Valdelomar.",
-                badgeColor: "bg-orange-100 text-orange-800"
+                badgeColor: "bg-orange-100 text-orange-900"
             },
             {
                 id: 6,
@@ -176,7 +392,7 @@
                 summary: "Nacido en Tacna y profundamente vinculado a la vida cultural de Arequipa (donde cursó estudios superiores y formó parte vital de la vida intelectual), Jorge Basadre es considerado el historiador peruano más importante del siglo XX. Dedicó absolutamente toda su existencia a estudiar, comprender y narrar la evolución social, política, económica y cultural del Perú independiente, superando la visión elitista de la historia para incluir al pueblo llano.",
                 aportes: "Su obra cumbre, 'Historia de la República del Perú' (que amplió y perfeccionó a lo largo de varias décadas en múltiples tomos), es la herramienta de consulta indispensable para entender nuestro devenir republicano. Además, como ministro de Educación impulsó de manera decisiva la modernización de las bibliotecas escolares y la protección del patrimonio cultural nacional.",
                 curiosidad: "Es el autor de la célebre frase: 'El Perú es un organismo dolido y a la vez prometedor', reflejando su visión optimista y realista sobre el futuro del país a pesar de sus múltiples crisis políticas.",
-                badgeColor: "bg-orange-100 text-orange-800"
+                badgeColor: "bg-orange-100 text-orange-900"
             },
 
             // --- HEROÍNAS Y PRECURSORAS ---
@@ -189,7 +405,7 @@
                 summary: "Valerosa mujer ayacuchana que actuó como informante estratégica y espía a favor de las fuerzas patriotas durante la lucha emancipadora dirigida por Simón Bolívar y Antonio José de Sucre en los Andes peruanos.",
                 aportes: "Prefirió ser fusilada por el ejército realista antes que revelar los nombres de los mensajeros y patriotas que colaboraban con la libertad nacional. Dictaba sus cartas con movimientos enemigos a un escribano de confianza.",
                 curiosidad: "Dado que era analfabeta en esa época, utilizaba su ingenio absoluto para memorizar y transmitir datos vitales sin levantar sospechas.",
-                badgeColor: "bg-pink-100 text-pink-800"
+                badgeColor: "bg-pink-100 text-pink-900"
             },
             {
                 id: 8,
@@ -200,7 +416,7 @@
                 summary: "Lideresa indígena de férreo carácter que organizó la compleja logística, el aprovisionamiento militar y las comunicaciones de la gran rebelión anticolonial junto a su esposo Túpac Amaru II.",
                 aportes: "Demostró una visión política y militar sobresaliente, exigiendo ataques rápidos y oportunos que muchas veces evitaron derrotas tempranas de las tropas rebeldes en el sur andino.",
                 curiosidad: "En documentos oficiales de la administración colonial se le otorgaba el rango de 'Coya' (reina) por el inmenso respeto y autoridad que imponía.",
-                badgeColor: "bg-pink-100 text-pink-800"
+                badgeColor: "bg-pink-100 text-pink-900"
             },
             {
                 id: 9,
@@ -211,7 +427,7 @@
                 summary: "Valiente activista social y defensora de los derechos humanos nacida en el Callao y arraigada en Villa El Salvador (Lima). Luchó incansablemente por la justicia social, los comedores populares y la paz.",
                 aportes: "Fundó la Federación Popular de Mujeres de Villa El Salvador (FEPOMUVES), organizando a las madres contra el hambre y enfrentándose con valentía frontal al terrorismo y la violencia política.",
                 curiosidad: "Era conocida popularmente como 'Madre Coraje' por su firmeza inquebrantable al marchar públicamente contra la intolerancia armada.",
-                badgeColor: "bg-pink-100 text-pink-800"
+                badgeColor: "bg-pink-100 text-pink-900"
             },
             {
                 id: 10,
@@ -222,7 +438,7 @@
                 summary: "Distinguida educadora, filántropa y benefactora peruana, conocida como la 'Abuela de los Niños' debido a su abnegada labor social en favor de la infancia y la educación pública.",
                 aportes: "Impulsó la creación de los primeros jardines de infancia (kindergartens) en el Perú y fundó instituciones benéficas y protectoras de la infancia desamparada y la maternidad.",
                 curiosidad: "Donó gran parte de su patrimonio personal para financiar asilos y escuelas destinadas a niños de familias de bajos recursos económicos.",
-                badgeColor: "bg-pink-100 text-pink-800"
+                badgeColor: "bg-pink-100 text-pink-900"
             },
 
             // --- HÉROES NACIONALES ---
@@ -235,7 +451,7 @@
                 summary: "Máximo héroe naval del Perú y comandante del legendario monitor Huáscar durante la Guerra del Pacífico. Demostró una maestría táctica impecable en el mar, manteniendo en constante jaque a la escuadra adversaria.",
                 aportes: "Su hidalguía y respeto absoluto por las leyes de la guerra y la vida humana le valieron el reconocimiento internacional, ordenando rescatar y auxiliar a los náufragos enemigos tras el combate de Iquique.",
                 curiosidad: "Era un hombre de trato sumamente sencillo, profundamente respetado por sus marineros y caracterizado por su firme rechazo a la vanidad militar.",
-                badgeColor: "bg-blue-100 text-blue-800"
+                badgeColor: "bg-blue-100 text-blue-900"
             },
             {
                 id: 12,
@@ -246,7 +462,7 @@
                 summary: "Coronel del Ejército peruano que asumió con estoicismo el mando de la guarnición en el Morro de Arica, organizando la defensa en condiciones de extrema inferioridad numérica y material.",
                 aportes: "Inmortalizó el honor patrio con su mítica respuesta ante el emisario adversario: 'Tengo deberes sagrados que cumplir y los cumpliré hasta quemar el último cartucho'.",
                 curiosidad: "Inició su trayectoria militar formal a una edad madura, habiendo destacado previamente con éxito en el ámbito del comercio nacional.",
-                badgeColor: "bg-blue-100 text-blue-800"
+                badgeColor: "bg-blue-100 text-blue-900"
             },
             {
                 id: 13,
@@ -257,7 +473,7 @@
                 summary: "Empresario y militar tarapaqueño que decidió sacrificar su patrimonio y su propia vida en defensa de la soberanía nacional durante la campaña del sur.",
                 aportes: "Se consagró en la eternidad al lanzarse a caballo por los precipicios del Morro de Arica para evitar que el estandarte patrio fuera capturado como trofeo enemigo.",
                 curiosidad: "Financió y equipó enteramente de su bolsillo a uno de los batallones que marcharon a defender la plaza militar.",
-                badgeColor: "bg-blue-100 text-blue-800"
+                badgeColor: "bg-blue-100 text-blue-900"
             },
             {
                 id: 14,
@@ -268,7 +484,7 @@
                 summary: "Valeroso capitán de la Fuerza Aérea del Perú que ofrendó su existencia durante el conflicto fronterizo con Ecuador en el año 1941.",
                 aportes: "Al ser alcanzado su avión por fuego antiaéreo en plena misión, dirigió su nave envuelta en llamas directamente contra las baterías enemigas, cumpliendo su deber supremo.",
                 curiosidad: "Su inolvidable rostro ilustra tradicionalmente el diseño oficial de los billetes de diez soles en el cono monetario peruano.",
-                badgeColor: "bg-blue-100 text-blue-800"
+                badgeColor: "bg-blue-100 text-blue-900"
             },
             {
                 id: 15,
@@ -279,7 +495,7 @@
                 summary: "Cacique de Surimana, Tungasuca y Pampamarca que lideró el levantamiento anticolonial más colosal del siglo XVIII en todo el continente americano.",
                 aportes: "Encabezó la lucha masiva contra los abusos de los corregidores, la mita esclavizadora, los repartos mercantiles y los gravámenes excesivos de la corona.",
                 curiosidad: "Era un hombre instruido, bilingüe (español y quechua), dedicado al comercio de arrieraje con recuas de mulas.",
-                badgeColor: "bg-blue-100 text-blue-800"
+                badgeColor: "bg-blue-100 text-blue-900"
             },
             {
                 id: 16,
@@ -290,7 +506,7 @@
                 summary: "Modesto pescador chorrillano que arriesgó su vida permanentemente al servir como enlace secreto de comunicación nadando entre los dos bandos independentistas.",
                 aportes: "Transportaba mensajes confidenciales amarrados a su cintura a través de las aguas marinas, soportando crueles tormentos y torturas sin delatar a nadie.",
                 curiosidad: "Cuenta la tradición popular que antes de marchar al fusilamiento, pidió como última voluntad saborear unos dulces picarones.",
-                badgeColor: "bg-blue-100 text-blue-800"
+                badgeColor: "bg-blue-100 text-blue-900"
             },
 
             // --- LETRAS Y CIENCIA ---
@@ -303,7 +519,7 @@
                 summary: "Destacado cuentista, poeta y ensayista iqueño, considerado el creador del postmodernismo literario peruano gracias a obras tan entrañables como 'El caballero Carmelo'.",
                 aportes: "Desplazó el eje de la narrativa nacional hacia la provincia costera, la calidez de la vida familiar y la nostalgia pueblerina con un estilo estético refinado.",
                 curiosidad: "Era célebre en los círculos bohemios limeños por su gran elegancia personal, sombreros llamativos y actitud vanguardista.",
-                badgeColor: "bg-purple-100 text-purple-800"
+                badgeColor: "bg-purple-100 text-purple-900"
             },
             {
                 id: 18,
@@ -314,7 +530,7 @@
                 summary: "Novelista, poeta y etnólogo peruano, máximo referente del indigenismo literario, que dedicó su vida a expresar el alma profunda y la cosmovisión del mundo andino.",
                 aportes: "Construyó un puente literario inigualable entre la lengua quechua y la narrativa occidental moderna en obras maestras como 'Los ríos profundos' y 'Todas las sangres'.",
                 curiosidad: "Aprendió a hablar fluidamente en quechua antes que en castellano debido a que pasó su infancia al cuidado de comunidades indígenas.",
-                badgeColor: "bg-purple-100 text-purple-800"
+                badgeColor: "bg-purple-100 text-purple-900"
             },
             {
                 id: 19,
@@ -325,7 +541,7 @@
                 summary: "Estudiante de medicina de la Universidad Mayor de San Marcos que consagró su corta vida a investigar los misterios patológicos de la fiebre de la Oroya.",
                 aportes: "Se inoculó voluntariamente sangre infectada para experimentar en carne propia los síntomas y demostrar que la fiebre y la verruga peruana eran una misma enfermedad.",
                 curiosidad: "Llevó un diario médico con el registro científico exacto de los estragos de la infección en su organismo hasta sus últimos días.",
-                badgeColor: "bg-purple-100 text-purple-800"
+                badgeColor: "bg-purple-100 text-purple-900"
             },
             {
                 id: 20,
@@ -336,7 +552,7 @@
                 summary: "Eminente sabio ariqueño, precursor de la ciencia médica peruana, fundador del Anfiteatro Anatómico y cofundador de la histórica Escuela de Medicina de San Fernando.",
                 aportes: "Impulsó de manera decisiva las ciencias biológicas, reformó la educación pública y participó activamente en los debates políticos de la independencia.",
                 curiosidad: "Fue ministro de Hacienda del libertador Simón Bolívar y destacó siempre por su mentalidad enciclopédica.",
-                badgeColor: "bg-purple-100 text-purple-800"
+                badgeColor: "bg-purple-100 text-purple-900"
             },
             {
                 id: 21,
@@ -347,7 +563,7 @@
                 summary: "Mística y religiosa criolla que consagró su existencia a la oración austera, el sacrificio personal y el auxilio constante a los enfermos y necesitados de Lima.",
                 aportes: "Fue la primera persona nativa de América en ser canonizada oficialmente por la Iglesia Católica, convirtiéndose en el símbolo eterno de bondad, pureza y devoción.",
                 curiosidad: "Construyó con sus propias manos una pequeña y austera ermita en el huerto de su hogar familiar para pasar largas horas meditando.",
-                badgeColor: "bg-purple-100 text-purple-800"
+                badgeColor: "bg-purple-100 text-purple-900"
             }
         ];
 
@@ -381,15 +597,15 @@
                 else if(char.category === 'cultura') categoryName = 'Letras y Ciencia';
 
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between text-center hover:shadow-lg hover:-translate-y-1 transition duration-300";
+                card.className = "bg-white rounded-2xl shadow-xs border border-stone-200/80 p-6 flex flex-col justify-between text-center card-hover";
                 card.innerHTML = `
                     <div>
-                        <span class="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full ${char.badgeColor} inline-block mb-3">${categoryName}</span>
-                        <h3 class="text-lg font-bold text-slate-900 mb-1 tracking-tight">${char.name}</h3>
-                        <p class="text-xs font-semibold text-red-700 mb-4">${char.role}</p>
+                        <span class="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${char.badgeColor} inline-block mb-4">${categoryName}</span>
+                        <h3 class="font-serif-title text-lg font-bold text-stone-900 mb-1 tracking-tight">${char.name}</h3>
+                        <p class="text-xs font-semibold text-red-900 mb-5">${char.role}</p>
                     </div>
-                    <button onclick="openModal(${char.id})" class="w-full py-2.5 px-4 bg-slate-100 hover:bg-red-700 hover:text-white text-slate-700 rounded-xl font-bold text-xs transition duration-200 cursor-pointer shadow-xs">
-                        Ver biografía completa ➔
+                    <button onclick="openModal(${char.id})" class="w-full py-2.5 px-4 bg-stone-100 hover:bg-red-900 hover:text-white text-stone-800 rounded-xl font-bold text-xs uppercase tracking-wider transition duration-200 cursor-pointer shadow-xs">
+                        Consultar Expediente ➔
                     </button>
                 `;
                 grid.appendChild(card);
@@ -400,11 +616,11 @@
             currentCategory = category;
             
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('bg-red-700', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300', 'shadow-sm');
+                btn.classList.remove('bg-red-900', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-white', 'text-stone-700', 'border', 'border-stone-300');
             });
-            event.target.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-300', 'shadow-sm');
-            event.target.classList.add('bg-red-700', 'text-white', 'shadow-md');
+            event.target.classList.remove('bg-white', 'text-stone-700', 'border', 'border-stone-300');
+            event.target.classList.add('bg-red-900', 'text-white', 'shadow-sm');
 
             const searchText = document.getElementById('searchInput').value;
             renderCharacters(searchText);
@@ -420,7 +636,7 @@
 
             let categoryText = '';
             if(char.category === 'arequipa') categoryText = 'Arequipa / Hunter';
-            else if(char.category === 'nacional') categoryText = 'Héroes Nacionales';
+            else if(char.category === 'nacional') categoryText = 'Héroe Nacional';
             else if(char.category === 'heroinas') categoryText = 'Heroínas y Precursoras';
             else if(char.category === 'cultura') categoryText = 'Letras y Ciencia';
 
@@ -457,8 +673,6 @@
                 closeModal();
             }
         }
-
-        window.onload = () => renderCharacters();
     </script>
 </body>
 </html>
